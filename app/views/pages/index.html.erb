@@ -10,19 +10,32 @@
     <%= submit_tag( "Import", class: "ui button" ) %>
   <% end %>
 </div>
+
+
 <% if @current_data.present? %>
+
+<div class="ui form">
+  <%= form_tag('/find', class: "ui form") do %>
+  <%= label_tag(:search, "Search for:") %>
+  <%= text_field_tag :search%>
+  <%= button_tag "Search", class: "ui button" %>
+  <% end %>
+</div>
+
+
+<%= paginate @current_data %>
 
 <table class="ui celled table">
   <thead>
     <tr>
-      <th>First Name</th>
-      <th>Last Name</th>
-      <th>Species</th>
-      <th>Gender</th>
+      <th><a href="/?order=first_name">First Name</a></th>
+      <th><a href="/?order=last_name">Last Name</th>
+      <th><a href="/?order=species">Species</th>
+      <th><a href="/?order=gender">Gender</th>
       <th>Locations</th>
       <th>Affiliations</th>
-      <th>Weapon</th>
-      <th>Vehicle</th>
+      <th><a href="/?order=weapon">Weapon</th>
+      <th><a href="/?order=vehicle">Vehicle</th>
     </tr>
   </thead>  
   <tbody>

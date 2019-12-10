@@ -4,4 +4,6 @@ Rails.application.routes.draw do
   get "/" => "pages#index"
 
   post "/" => "pages#import"
+
+  post "/find" => "pages#find"
 end
