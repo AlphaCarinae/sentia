@@ -25,6 +25,7 @@ class PagesController < ApplicationController
       new_person.vehicle = new_data["Vehicle"] if new_data["Vehicle"]
 
       new_data["Affiliations"]&.split(',')&.each do |aff|
+        aff = aff.titleize
         old_aff = Affiliation.find_by name: aff
 
         if old_aff.present? 
@@ -38,6 +39,7 @@ class PagesController < ApplicationController
       end
 
       new_data["Location"]&.split(',')&.each do |loc|
+        loc = loc.titleize
 
         old_loc = Location.find_by name: loc
 
@@ -52,7 +54,8 @@ class PagesController < ApplicationController
 
       end
 
-      new_person.save
+      exisiting_entry = Person.find_by first_name: new_person.first_name, last_name: new_person.last_name
+      new_person.save if !exisiting_entry.present?
     end
 
     redirect_to '/'

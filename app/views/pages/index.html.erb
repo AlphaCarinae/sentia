@@ -1,38 +1,47 @@
-<h1>Import your CSV here/h1>
 
 
-<%= form_tag({:action => :import}, multipart: true) do %>
-  <%= file_field_tag :file %>
-  <%= submit_tag( "Import" ) %>
-<% end %>
+<div class="ui container">
 
+<div class="ui form">
+  <h1 class="ui header">Import your CSV here</h1>
+
+  <%= form_tag({:action => :import}, multipart: true, class: "ui form") do %>
+    <%= file_field_tag :file, class: "ui field" %>
+    <%= submit_tag( "Import", class: "ui button" ) %>
+  <% end %>
+</div>
 <% if @current_data.present? %>
 
-<table>
-  <tr>
-    <th>First Name</th>
-    <th>Last Name</th>
-    <th>Species</th>
-    <th>Gender</th>
-    <th>Locations</th>
-    <th>Affiliations</th>
-    <th>Weapon</th>
-    <th>Vehicle</th>
-  </tr>
-  
+<table class="ui celled table">
+  <thead>
+    <tr>
+      <th>First Name</th>
+      <th>Last Name</th>
+      <th>Species</th>
+      <th>Gender</th>
+      <th>Locations</th>
+      <th>Affiliations</th>
+      <th>Weapon</th>
+      <th>Vehicle</th>
+    </tr>
+  </thead>  
+  <tbody>
   <% @current_data.each do |char| %>
 
-  <tr>
-      <td><%= char.first_name %></td>
-      <td><%= char.last_name %></td>
-      <td><%= char.species %></td>
-      <td><%= char.gender %></td>
-      <td><%= char.locations.map(&(:name)).join(',') %></td>
-      <td><%= char.affiliations.map(&(:name)).join(',') %></td>
-      <td><%= char.weapon %></td>
-      <td><%= char.vehicle %></td>
-  </tr> 
+    <tr>
+        <td><%= char.first_name %></td>
+        <td><%= char.last_name %></td>
+        <td><%= char.species %></td>
+        <td><%= char.gender %></td>
+        <td><%= char.locations.map(&(:name)).join(',') %></td>
+        <td><%= char.affiliations.map(&(:name)).join(',') %></td>
+        <td><%= char.weapon %></td>
+        <td><%= char.vehicle %></td>
+    </tr> 
   <% end  %>
+  </tbody>
 </table>
 
-<% end %>
+<% end%>
+
+</div>
